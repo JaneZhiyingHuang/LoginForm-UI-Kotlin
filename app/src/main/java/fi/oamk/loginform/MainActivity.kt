@@ -7,11 +7,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
-import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import fi.oamk.loginform.ui.theme.LoginFormTheme
@@ -23,6 +21,8 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.Button
+import androidx.compose.runtime.Composable
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,9 +42,6 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun LoginForm(modifier: Modifier = Modifier) {
-    var username by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -63,8 +60,8 @@ fun LoginForm(modifier: Modifier = Modifier) {
 
         // Username Input with icon on the right
         OutlinedTextField(
-            value = username,
-            onValueChange = { username = it },
+            value = "",
+            onValueChange = { },
             label = { Text("Username") },
             trailingIcon = {
                 Icon(
@@ -77,12 +74,11 @@ fun LoginForm(modifier: Modifier = Modifier) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Password Input with icon on the right
+        // Password Input without visual transformation
         OutlinedTextField(
-            value = password,
-            onValueChange = { password = it },
+            value = "",
+            onValueChange = { },
             label = { Text("Password") },
-            visualTransformation = PasswordVisualTransformation(),
             trailingIcon = {
                 Icon(
                     imageVector = Icons.Filled.Lock,
@@ -95,7 +91,7 @@ fun LoginForm(modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.height(24.dp))
 
         Button(
-            onClick = { /* Add submit logic here */ },
+            onClick = { /* submit logic */ },
             modifier = Modifier.fillMaxWidth(),
             colors = ButtonDefaults.buttonColors(
                 containerColor = MaterialTheme.colorScheme.primary,
@@ -104,8 +100,6 @@ fun LoginForm(modifier: Modifier = Modifier) {
         ) {
             Text("Submit")
         }
-
-
     }
 }
 
